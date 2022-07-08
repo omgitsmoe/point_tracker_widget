@@ -27,33 +27,7 @@ window.addEventListener('onEventReceived', function (obj) {
     }
     const listener = obj.detail.listener.split("-")[0];
     const event = obj.detail.event;
-
-    if (listener === 'follower') {
-        if (includeFollowers) {
-            processEvent('follower', 1);
-        }
-    } else if (listener === 'subscriber') {
-        if (includeSubs) {
-          console.log('TIER', event.tier, 'SUB');
-          let tierMultiplier = tier1Multiplier;
-          if (event.tier === 2000) {
-            tierMultiplier = tier2Multiplier;
-          } else if (event.tier === 3000) {
-            tierMultiplier = tier3Multiplier;
-          }
-          
-          const tierApplied = event.amount * tierMultiplier;
-          processEvent('subscriber', tierApplied);
-        }
-    } else if (listener === 'cheer') {
-        if (includeCheers) {
-            processEvent('cheer', event.amount);
-        }
-    } else if (listener === 'tip') {
-        if (includeTips) {
-        	processEvent('tip', event.amount);
-        }
-    }
+  	parseEvent(listener, event);
 });
 
 window.addEventListener('onWidgetLoad', function (obj) {
@@ -81,15 +55,47 @@ window.addEventListener('onWidgetLoad', function (obj) {
     cheersPerPoint = fieldData.cheersPerPoint;
     tipsMultiplier = fieldData.tipsMultiplier;
     userLocale = fieldData.locale;
-  	console.log("RESETTING POINTS!!!");
     
+  	// NOTE: there are a bunch of test events coming in that can't
+    // be turned off??
     // let eventIndex;
     // for (eventIndex = 0; eventIndex < recents.length; eventIndex++) {
-    //    const event = recents[eventIndex];
+    //   const event = recents[eventIndex];
+    //   parseEvent(event.type, event);
     // }
   
     updateProgressBar();
 });
+
+function parseEvent(eventType, event) {
+  console.log('EVENT', eventType, event);
+  if (eventType === 'follower') {
+    if (includeFollowers) {
+      processEvent('follower', 1);
+    }
+  } else if (eventType === 'subscriber') {
+    if (includeSubs) {
+      let tierMultiplier = tier1Multiplier;
+      if (event.tier === 2000) {
+        tierMultiplier = tier2Multiplier;
+      } else if (event.tier === 3000) {
+        tierMultiplier = tier3Multiplier;
+      }
+
+      // event.amount is the months subbed, not the amount gifted etc.
+      const tierApplied = 1 * tierMultiplier;
+      processEvent('subscriber', tierApplied);
+    }
+  } else if (eventType === 'cheer') {
+    if (includeCheers) {
+      processEvent('cheer', event.amount);
+    }
+  } else if (eventType === 'tip') {
+    if (includeTips) {
+      processEvent('tip', event.amount);
+    }
+  }
+}
 
 function updateProgressBar() {
   const currentText = document.getElementById('progress-current');
