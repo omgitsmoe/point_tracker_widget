@@ -68,7 +68,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
 });
 
 function parseEvent(eventType, event) {
-  console.log('EVENT', eventType, event);
+  // console.log('EVENT', eventType, event);
   if (eventType === 'follower') {
     if (includeFollowers) {
       processEvent('follower', 1);
@@ -81,9 +81,10 @@ function parseEvent(eventType, event) {
       if (event.isCommunityGift) return;
 
       let tierMultiplier = tier1Multiplier;
-      if (event.tier === 2000) {
+      // NOTE: also allow strings like '2000' as tier
+      if (event.tier == 2000) {
         tierMultiplier = tier2Multiplier;
-      } else if (event.tier === 3000) {
+      } else if (event.tier == 3000) {
         tierMultiplier = tier3Multiplier;
       }
 
