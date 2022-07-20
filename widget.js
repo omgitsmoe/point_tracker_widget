@@ -75,6 +75,11 @@ function parseEvent(eventType, event) {
     }
   } else if (eventType === 'subscriber') {
     if (includeSubs) {
+      // ignore single gifted subs that are PART OF COMMUNITY GIFTS and
+      // use the initial bulkgifted where event.amount is the nr of gifted subs
+      // single gifted subs where event.gifted AND !event.isCommunityGift will still count
+      if (event.isCommunityGift) return;
+
       let tierMultiplier = tier1Multiplier;
       if (event.tier === 2000) {
         tierMultiplier = tier2Multiplier;
@@ -83,7 +88,9 @@ function parseEvent(eventType, event) {
       }
 
       // event.amount is the months subbed, not the amount gifted etc.
-      const tierApplied = 1 * tierMultiplier;
+      // unless it's a bulkGifted event!!
+      const amount = event.bulkGifted ? event.amount : 1;
+      const tierApplied = amount * tierMultiplier;
       processEvent('subscriber', tierApplied);
     }
   } else if (eventType === 'cheer') {
