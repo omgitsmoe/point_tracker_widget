@@ -67,7 +67,36 @@ window.addEventListener('onWidgetLoad', function (obj) {
     updateProgressBar();
 });
 
+// adapted from: https://github.com/reboot0-de/se-tools/blob/d947ef40e85ac24d09423d91c67d22ef378ad99f/modules/Utils.js#L430
+// thanks to thekillgfx for the hint
+function parseTier(value, primeAsTier1 = true)
+  {
+    if(typeof value === "string")
+    {
+      if(value === "prime") { return (primeAsTier1) ? 1 : "prime"; }
+      value = Number(value);
+    }
+    switch(value)
+    {
+      case 1000:
+      case 1:
+        return 1;
+      case 2000:
+      case 2:
+        return 2;
+      case 3000:
+      case 3:
+        return 3;
+      default:
+        return 1;
+    }
+  }
+
+
 function parseEvent(eventType, event) {
+  // will use outdated values if defined outside of function
+  const tierMultipliers = [tier1Multiplier, tier2Multiplier, tier3Multiplier];
+
   // console.log('EVENT', eventType, event);
   if (eventType === 'follower') {
     if (includeFollowers) {
@@ -80,14 +109,7 @@ function parseEvent(eventType, event) {
       // single gifted subs where event.gifted AND !event.isCommunityGift will still count
       if (event.isCommunityGift) return;
 
-      let tierMultiplier = tier1Multiplier;
-      // NOTE: also allow strings like '2000' as tier
-      if (event.tier == 2000) {
-        tierMultiplier = tier2Multiplier;
-      } else if (event.tier == 3000) {
-        tierMultiplier = tier3Multiplier;
-      }
-
+      let tierMultiplier = tierMultipliers[parseTier(event.tier, true) - 1];
       // event.amount is the months subbed, not the amount gifted etc.
       // unless it's a bulkGifted event!!
       const amount = event.bulkGifted ? event.amount : 1;
