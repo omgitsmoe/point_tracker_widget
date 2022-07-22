@@ -5,3 +5,8 @@
     overflow: hidden;
     text-shadow: {{fontShadow}};
 }
+
+#points-text {
+  background-color: {{backgroundColor}};
+  padding: 5px;
+}

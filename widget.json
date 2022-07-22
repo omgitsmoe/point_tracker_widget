@@ -33,6 +33,11 @@
     "label": "Font shadow",
     "value": "1px 1px 1px #000000"
   },
+  "backgroundColor": {
+    "type": "colorpicker",
+    "label": "Text background color",
+    "value": "rgba(60, 60, 60, 0.36)"
+  },  
   "includeFollowers": {
     "type": "dropdown",
     "label": "Count followers:",
@@ -560,3 +565,4 @@
     }
   }
 }
+
