@@ -6,7 +6,14 @@
     text-shadow: {{fontShadow}};
 }
 
-#points-text {
-  background-color: {{backgroundColor}};
+.pad {
   padding: 5px;
+}
+
+#points-text {
+  background-color: {{pointsBgColor}};
+}
+
+#points-description {
+  background-color: {{descriptionBgColor}};
 }

@@ -6,6 +6,11 @@
     "label": "Current points",
     "value": 0
   },
+  "pointsDescription": {
+    "type": "text",
+    "label": "Points description",
+    "value": "Current points:"
+  },
   "globalMultiplier": {
     "type": "number",
     "min": 0,
@@ -33,9 +38,14 @@
     "label": "Font shadow",
     "value": "1px 1px 1px #000000"
   },
-  "backgroundColor": {
+  "pointsBgColor": {
     "type": "colorpicker",
-    "label": "Text background color",
+    "label": "Point text background color",
+    "value": "rgba(60, 60, 60, 0.36)"
+  },
+  "descriptionBgColor": {
+    "type": "colorpicker",
+    "label": "Point description background color",
     "value": "rgba(60, 60, 60, 0.36)"
   },  
   "includeFollowers": {
@@ -565,4 +575,3 @@
     }
   }
 }
-
