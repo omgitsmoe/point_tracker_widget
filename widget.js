@@ -1,12 +1,9 @@
 let userLocale = "en-US",
     includeFollowers = true,
-    includeRedemptions = true,
-    includeHosts = true,
     includeSubs = true,
     includeTips = true,
     includeCheers = true,
     currentPoints = 0,
-    pointsGoal = 0,
     globalMultiplier = 1,
     tier1Multiplier = 1,
     tier2Multiplier = 2,
@@ -39,13 +36,11 @@ window.addEventListener('onWidgetLoad', function (obj) {
     const fieldData = obj.detail.fieldData;
     eventsLimit = fieldData.eventsLimit;
     includeFollowers = (fieldData.includeFollowers === "yes");
-    includeRedemptions = (fieldData.includeRedemptions === "yes");
     includeHosts = (fieldData.includeHosts === "yes");
     includeSubs = (fieldData.includeSubs === "yes");
     includeTips = (fieldData.includeTips === "yes");
     includeCheers = (fieldData.includeCheers === "yes");
   	currentPoints = fieldData.currentPoints;
-  	pointsGoal = fieldData.pointsGoal;
   	globalMultiplier = fieldData.globalMultiplier;
   	tier1Multiplier = fieldData.tier1Multiplier;
     tier2Multiplier = fieldData.tier2Multiplier;
@@ -64,7 +59,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     //   parseEvent(event.type, event);
     // }
   
-    updateProgressBar();
+    updatePoints();
 });
 
 // adapted from: https://github.com/reboot0-de/se-tools/blob/d947ef40e85ac24d09423d91c67d22ef378ad99f/modules/Utils.js#L430
@@ -127,11 +122,8 @@ function parseEvent(eventType, event) {
   }
 }
 
-function updateProgressBar() {
-  const currentText = document.getElementById('progress-current');
-  const fill = document.getElementById('progress-fill');
-  const progressInPercent = currentPoints / pointsGoal * 100;
-  fill.style.width = `${progressInPercent}%`;
+function updatePoints() {
+  const currentText = document.getElementById('points-text');
   currentText.textContent = currentPoints;
 }
 
@@ -149,6 +141,5 @@ function processEvent(type, amount) {
   
   currentPoints += amount * typeMultiplier * globalMultiplier;
   
-  updateProgressBar();
+  updatePoints();
 }
-

@@ -1,16 +1,4 @@
 {
-  "titleText": {
-    "type": "text",
-    "label": "Title text",
-    "value": "Points goal:"
-  },
-  "pointsGoal": {
-    "type": "number",
-    "min": 0,
-    "step": 1,
-    "label": "Goal",
-    "value": 30
-  },
   "currentPoints": {
     "type": "number",
     "min": 0,
@@ -25,16 +13,6 @@
     "label": "Global multiplier",
     "value": 1
   },
-  "barColor": {
-    "type": "colorpicker",
-    "label": "Bar color",
-    "value": "rgb(63, 81, 181)"
-  },
-  "fillColor": {
-    "type": "colorpicker",
-    "label": "Progress fill color",
-    "value": "rgb(145, 35, 10)"
-  },  
   "fontColor": {
     "type": "colorpicker",
     "label": "Font color",
@@ -45,19 +23,14 @@
     "label": "Font Size",
     "value": 18
   },
-  "titleColor": {
-    "type": "colorpicker",
-    "label": "Title font color",
-    "value": "rgb(255, 255, 255)"
-  },
-  "titleSize": {
-    "type": "number",
-    "label": "Title font Size",
-    "value": 24
-  },
-  "titleShadow": {
+  "fontFamily": {
     "type": "text",
-    "label": "Title font shadow",
+    "label": "Font family (Google Fonts)",
+    "value": "Montserrat"
+  },
+  "fontShadow": {
+    "type": "text",
+    "label": "Font shadow",
     "value": "1px 1px 1px #000000"
   },
   "includeFollowers": {
@@ -587,4 +560,3 @@
     }
   }
 }
-
