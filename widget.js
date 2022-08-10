@@ -124,7 +124,8 @@ function parseEvent(eventType, event) {
 
 function updatePoints() {
   const currentText = document.getElementById('points-text');
-  currentText.textContent = currentPoints;
+  // use at most 2 decimals places; the + drops any extra zeroes at the end
+  currentText.textContent = +currentPoints.toFixed(2);
 }
 
 function processEvent(type, amount) {
