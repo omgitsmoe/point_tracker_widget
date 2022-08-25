@@ -2,7 +2,7 @@
   "currentPoints": {
     "type": "number",
     "min": 0,
-    "step": 1,
+    "step": 0.01,
     "label": "Current points",
     "value": 0
   },
@@ -110,12 +110,12 @@
       "no": "No"
     }
   },
-  "tipsMultiplier": {
+  "tipsPerPoint": {
     "type": "number",
     "min": 0,
-    "step": 0.1,
-    "label": "Tips multiplier",
-    "value": 1
+    "step": 0.01,
+    "label": "Units of preferred currency per point",
+    "value": 3
   },
   "includeCheers": {
     "type": "dropdown",
@@ -575,3 +575,4 @@
     }
   }
 }
+
